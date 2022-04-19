@@ -4,6 +4,6 @@ git config --global user.email "lordrhexx@gmail.com"
 git add --all
 git commit -m "update example"
 git branch -M main
-git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
+git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
 
 git push origin main
