@@ -6,4 +6,4 @@ git commit -m "update example"
 git branch -M main
 git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
 
-git push -u origin main
+git push origin main
