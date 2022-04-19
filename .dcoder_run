@@ -1,9 +1,0 @@
-
-git config --global user.email "lordrhexx@gmail.com"
- git config --global user.name "only1drhex"
-git add --all
-git commit -m "re-update readme"
-git branch -M main
-git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
-
-git push origin main
