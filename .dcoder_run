@@ -5,5 +5,5 @@ git add --all
 git commit -m "testing 2"
 git branch -M main
 git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
-git pull origin main
+
 git push -u origin main
