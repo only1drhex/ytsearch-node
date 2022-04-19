@@ -2,7 +2,7 @@
 git config --global user.email "lordrhexx@gmail.com"
  git config --global user.name "only1drhex"
 git add --all
-git commit -m "testing 1"
+git commit -m "testing 2"
 git branch -M main
 git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
 git pull origin main

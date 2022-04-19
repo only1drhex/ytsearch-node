@@ -1,16 +1,15 @@
-const ytsr = require("../src/parsedata.js")
-const fs = require("fs")
-const util = require("util")
-
+const ytsearch = require("../")
 
 const main = async() =>{
+<<<<<<< HEAD
   let saveString;
   let results = await ytsr("Black Panther")
+=======
+  let results = await ytsearch("Black Panther")
   
-  console.log(results[0]. description)
-  saveString = util.inspect(results, { depth: Infinity });
-  fs.writeFileSync('./example.txt', saveString);
-
+  console.log(results)
+>>>>>>> 1dffa428c217be2c1fb4ae15825de634b45f532f
+  
   
   
 }

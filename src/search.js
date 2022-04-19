@@ -19,10 +19,6 @@ let resp = await axios.get(base,{params : options })
     var data = c.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents;
     var index, confirm = false;
     
-    //Find videoRenderer position and break out of nested loop on time.
-    
-    
-    
     for(i=0;i<data.length;i++)
     {
          if(confirm) break;
@@ -45,9 +41,7 @@ let resp = await axios.get(base,{params : options })
 }
 data = data[index].itemSectionRenderer.contents;
 return data;
-    
-    
-   }
+     }
    
  module.exports = search
    
