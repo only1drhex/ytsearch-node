@@ -1,8 +1,4 @@
 const axios = require('axios');
-const FS = require("fs")
-
-
-
 const search = async(query) =>
 {
 
