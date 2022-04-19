@@ -4,6 +4,6 @@ git config --global user.email "lordrhexx@gmail.com"
 git add --all
 git commit -m "re-updates readme"
 git branch -M main
-git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
-git pull origin mai
+git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
+git pull origin main
 git push origin main
