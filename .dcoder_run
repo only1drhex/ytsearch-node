@@ -1,9 +1,0 @@
-
-git config --global user.email "lordrhexx@gmail.com"
- git config --global user.name "only1drhex"
-git add --all
-git commit -m "sdd readme"
-git branch -M main
-git remote set-url origin https://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@github.com/only1drhex/ytsearch.git
-git pull origin main
-git push origin main
