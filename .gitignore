@@ -3,3 +3,5 @@ src/node_modules
 src/README.md
 .util
 src/package-lock.json
+node_modules
+.upm
