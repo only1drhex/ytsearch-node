@@ -8,7 +8,9 @@ const toSeconds=r=>{if(2==r.split(":").length){var e=(r=r.split(":"))[0],t=r[1];
 const extractData = async(q) =>
 
 {
-  
+  if(q=="") { 
+    throw new Error("Empty query strings are not allowed");
+     }
    if(typeof q == "string") q = q.replace(/\s+/g,"+"); else throw new Error("Invalid search query. Search query must be of type 'String'");
   
  let data = await getData(q);
