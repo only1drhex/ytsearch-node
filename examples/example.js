@@ -1,4 +1,4 @@
-const ytsearch = require("node-ytsearch")
+const ytsearch = require("ytsearch-node")
 
 const main = async() =>{
   let results = await ytsearch("Black Panther")
