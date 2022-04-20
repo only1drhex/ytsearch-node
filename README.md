@@ -1,6 +1,6 @@
 # yt-vsr
 
-yt video search ```(yt-vsr)``` allows you search YouTube videos 
+yt videos search ```(yt-vsr)``` is a js only package that allows you make YouTube search. It doesn't require any API keys or account login.
 
 
 
