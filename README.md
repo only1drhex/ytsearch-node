@@ -1,9 +1,7 @@
 # ytsearch-node
 
 [![NPM version](https://img.shields.io/npm/v/ytsearch-node.svg?maxAge=3600)](https://www.npmjs.com/package/ytsearch-node)
-[![NPM downloads](https://img.shields.io/npm/dt/ytsearch-node.svg?maxAge=3600)](https://www.npmjs.com/package/ytsearch-node)
 [![codecov](https://codecov.io/gh/only1drhex/ytsearch-node/branch/master/graph/badge.svg)](https://codecov.io/gh/only1drhex/ytsearch-node)
-[![Known Vulnerabilities](https://snyk.io/test/github/only1drhex/ytsearch-node/badge.svg)](https://snyk.io/test/github/only1drhex/ytsearch-node)
 
 
 
