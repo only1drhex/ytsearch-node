@@ -1,13 +1,13 @@
-# yt-vsr
+# ytsearch-node
 
-yt videos search ```(yt-vsr)``` is a js only package that allows you make YouTube search. It doesn't require any API keys or account login.
+ytsearch-node is a js only package that allows you make typical YouTube search. It doesn't require any API keys or account login.
 
 
 
 # Installation
 
 ``` pip
-npm install yt-vsr 
+npm install ytsearch-node 
 ```
 
 
@@ -19,7 +19,7 @@ npm install yt-vsr
 # Usage
 
 ``` js
-const ytsearch= require("yt-vsr")
+const ytsearch= require("ytsearch-node")
 let results = await ytsearch("Black Panther")
  console.log(results[0].title)
  
