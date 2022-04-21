@@ -6,7 +6,7 @@
 
 ytsearch-node is a js only package that allows you make typical YouTube search. It doesn't require any API keys or account login.
 
-
+A Runkit Simulation for this package can be found [here](https://runkit.com/only1drhex/ytsearch-node)
 
 # Installation
 
