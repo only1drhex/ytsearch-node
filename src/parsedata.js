@@ -26,7 +26,7 @@ const extractData = async(q) =>
       }
 
  var retrieve  = data[i].videoRenderer;
- if(retrieve.lengthText)
+ if(retrieve.lengthText && retrieve.lengthText.simpleText)
 
  {
     var duration = retrieve.lengthText.simpleText;
@@ -41,7 +41,7 @@ const extractData = async(q) =>
  
     
     
- if (retrieve.viewCountText.simpleText) {
+ if (retrieve.viewCountText && retrieve.viewCountText.simpleText) {
           var views =  retrieve.viewCountText.simpleText;
 }
 else {
