@@ -1,7 +1,6 @@
 # ytsearch-node
 
 [![NPM version](https://img.shields.io/npm/v/ytsearch-node.svg?maxAge=3600)](https://www.npmjs.com/package/ytsearch-node)
-[![codecov](https://codecov.io/gh/only1drhex/ytsearch-node/branch/master/graph/badge.svg)](https://codecov.io/gh/only1drhex/ytsearch-node)
 
 
 
