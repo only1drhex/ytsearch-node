@@ -1,4 +1,5 @@
 const getData = require("./search.js");
+const  shortNumber = require('short-number');
 const extractedData = [];
 const WatchUrl = "https://www.youtube.com/watch?v="
 const Url ="https://www.youtube.com" 
@@ -38,23 +39,26 @@ const extractData = async(q) =>
  }
 
  
- 
-  if (retrieve.shortViewCountText) {
-  var shortViews = retrieve.shortViewCountText.simpleText;
-      
-    }
     
     
- if (retrieve.viewCountText ) {
+ if (retrieve.viewCountText.simpleText) {
           var views =  retrieve.viewCountText.simpleText;
 }
+else {
+  
+  var views = "0"
+}
+
+ 
+ 
+
 
 var id= retrieve.videoId;
 var seconds = toSeconds(duration);
 var title = retrieve.title.runs[0].text;
 var thumb = retrieve.thumbnail.thumbnails[0].url[0];  
-if(typeof views == "string") views= views.split(",").join("").split("view")[0]; else views = ""
-if(typeof shortViews == "string") shortViews = shortViews.split("view")[0].trim();
+if(typeof views == "string") views= Number(views.split(",").join("").split("view")[0]); else views = ""
+if(views) var shortViews = shortNumber(views); else var shortViews = "0"
 
  var thumb = 
 
