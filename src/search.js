@@ -39,8 +39,22 @@ let resp = await axios.get(base,{params : options })
     }
     
 }
-data = data[index].itemSectionRenderer.contents;
-return data;
+
+
+if(typeof data[index] == "object" && data[index].hasOwnProperty("itemSectionRenderer")) 
+{ 
+  data = data[index].itemSectionRenderer.contents; 
+  return data;
+}
+else {
+  
+  throw new Error ("No results were found for search query '"+ query +"'.")
+}
+
+
+
+
+
      }
    
  module.exports = search
