@@ -25,7 +25,7 @@ npm install ytsearch-node
 ``` js
 const ytsearch = require('ytsearch-node');
 
-const results = await ytsearch(query);
+const results = await ytsearch("Black Panther");
 for(i=0;i<6;i++) console.log(results[i].title, results[i].shortViewCount)
 
 
