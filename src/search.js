@@ -1,5 +1,5 @@
 const axios = require('axios');
-const search = async(query) =>
+const search = async(query,ogq) =>
 {
 
 const base  = "https://www.youtube.com/results"
@@ -41,6 +41,7 @@ let resp = await axios.get(base,{params : options })
 }
 
 
+
 if(typeof data[index] == "object" && data[index].hasOwnProperty("itemSectionRenderer")) 
 { 
   data = data[index].itemSectionRenderer.contents; 
@@ -48,7 +49,7 @@ if(typeof data[index] == "object" && data[index].hasOwnProperty("itemSectionRend
 }
 else {
   
-  throw new Error ("No results were found for search query '"+ query +"'.")
+  throw new Error ("No results were found for search query '"+ ogq +"'.")
 }
 
 

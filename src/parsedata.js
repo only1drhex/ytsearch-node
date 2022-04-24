@@ -12,7 +12,7 @@ const extractData = async(q) =>
    if(typeof q == "string")
    {
    
-     
+     var og_query = q;
     
 if (q=="") throw new Error("Empty query strings are not allowed"); else  q = q.replace(/\s+/g,"+");
     
@@ -23,7 +23,7 @@ if (q=="") throw new Error("Empty query strings are not allowed"); else  q = q.r
     throw new Error("Invalid search query. Search query must be of type 'String'");
   }
   
- let data = await getData(q);
+ let data = await getData(q,og_query);
   for(i=0;i<data.length;i++)
   
   
