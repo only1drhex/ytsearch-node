@@ -1,172 +1,65 @@
-const getData = require("./search.js");
-const  shortNumber = require('short-number');
-const extractedData = [];
+const search = require("./search.js");
+const shortNumber = require('short-number');
+
 const WatchUrl = "https://www.youtube.com/watch?v="
-const Url ="https://www.youtube.com" 
-const toSeconds=r=>{if(2==r.split(":").length){var e=(r=r.split(":"))[0],t=r[1];return 60*Number(e)+Number(t)}if(3==r.split(":").length){e=(r=r.split(":"))[0],t=60*r[1];var u=r[2];return 3600*Number(e)+Number(t)+Number(u)}return" "};
+const Url = "https://www.youtube.com"
 
+const toSeconds = (timeString) => {
+  const [hours, minutes, seconds] = timeString.split(":");
+  return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+};
 
-const extractData = async(q) =>
-
-{
-   if(typeof q == "string")
-   {
-   
-     var og_query = q;
-    
-if (q=="") throw new Error("Empty query strings are not allowed"); else  q = q.replace(/\s+/g,"+");
-    
+const extractData = async (query) => {
+  if (typeof query !== "string" || query.trim() === "") {
+    throw new Error("Invalid search query. Search query must be a non-empty string");
   }
-  
-  else
-  {
-    throw new Error("Invalid search query. Search query must be of type 'String'");
-  }
-  
- let data = await getData(q,og_query);
-  for(i=0;i<data.length;i++)
-  
-  
-  {
-     
-     
-     if (!data[i].videoRenderer) {
-            continue;
-      }
 
- var retrieve  = data[i].videoRenderer;
- if(retrieve.lengthText && retrieve.lengthText.simpleText)
+  const searchData = await search(query);
 
- {
-    var duration = retrieve.lengthText.simpleText;
-    }
- 
- 
- else
- {
-         var duration = "00:00";       
- }
+  const videoData = searchData.filter(item => item.videoRenderer).map(item => {
+    const videoRenderer = item.videoRenderer;
+    const id = videoRenderer.videoId;
+    const title = videoRenderer.title.runs[0].text;
+    const thumbnail = {
+      url: videoRenderer.thumbnail.thumbnails[0].url,
+      width: videoRenderer.thumbnail.thumbnails[0].width,
+      height: videoRenderer.thumbnail.thumbnails[0].height
+    };
+    const viewCount = parseInt((videoRenderer.viewCountText || {}).simpleText?.replace(/[^0-9]/g, "")) || 0;
+    const shortViewCount = shortNumber(viewCount);
+    const duration = videoRenderer.lengthText?.simpleText || "00:00";
+    const seconds = toSeconds(duration);
+    const author = videoRenderer.ownerText?.runs[0];
+    const authorUrl = author?.navigationEndpoint.browseEndpoint.canonicalBaseUrl || author?.navigationEndpoint.commandMetadata.webCommandMetadata.url;
+    const isVerified = !!(videoRenderer.ownerBadges?.some(badge => badge.metadataBadgeRenderer.label === 'VERIFIED'));
+    const liveStream = videoRenderer.badges?.some(badge => badge.metadataBadgeRenderer.label === 'LIVE NOW');
+    const description = (videoRenderer.descriptionSnippet || {}).runs?.map(run => run.text).join(" ") || "";
+    const publishedAt = videoRenderer.publishedTimeText?.simpleText || "";
 
- 
-    
-    
- if (retrieve.viewCountText && retrieve.viewCountText.simpleText) {
-          var views =  retrieve.viewCountText.simpleText;
-}
-else {
-  
-  var views = "0"
-}
+    const watchUrl = WatchUrl + id;
 
- 
- 
+    return {
+      type: "video",
+      id,
+      title,
+      thumbnail,
+      viewCount,
+      shortViewCount,
+      duration,
+      seconds,
+      author: author ? {
+        name: author.text,
+        url: Url + authorUrl,
+        verified: isVerified
+      } : null,
+      liveStream,
+      description,
+      watchUrl,
+      publishedAt
+    };
+  });
 
+  return videoData;
+};
 
-var id= retrieve.videoId;
-var seconds = toSeconds(duration);
-var title = retrieve.title.runs[0].text;
-var thumb = retrieve.thumbnail.thumbnails[0].url[0];  
-if(typeof views == "string") views= Number(views.split(",").join("").split("view")[0]); else views = ""
-if(views) var shortViews = shortNumber(views); else var shortViews = "0"
-
- var thumb = 
-
-{       "url": retrieve.thumbnail.thumbnails[0].url,
-        "width" : retrieve.thumbnail.thumbnails[0].width,
-        "height" : retrieve.thumbnail.thumbnails[0].height
-}
-
-
-
-  
-var authr = retrieve.ownerText && retrieve.ownerText.runs[0]; 
-
-
-let authorUrl = null;
-
-
- if (authr) { authorUrl = authr.navigationEndpoint.browseEndpoint.canonicalBaseUrl || authr.navigationEndpoint.commandMetadata.webCommandMetadata.url; } 
- 
- var descrip = " ";
- if(retrieve.detailedMetadataSnippets && retrieve.detailedMetadataSnippets[0].snippetText)
- 
- {
-  for(t=0;t<retrieve.detailedMetadataSnippets[0].snippetText.runs.length;t++)
- {
-          descrip += retrieve.detailedMetadataSnippets[0].snippetText.runs[t].text +" "
-         
-       
- }
- 
- 
- }
- 
- 
-  
- var badges = Array.isArray(retrieve.badges) ? retrieve.badges.map(a => a.metadataBadgeRenderer.label) : []; 
- 
-  var isVerified = !!(retrieve.ownerBadges && JSON.stringify(retrieve.ownerBadges).includes('VERIFIED')); 
-   var liveStream = badges.some(b => b === 'LIVE NOW');
- 
-
-
-var author = authr ? {
-          "name" : authr.text ,
-          "url" :    Url+authorUrl ,
-          "verified" : isVerified
-          
-  } : null;
-
-
-var watchUrl = WatchUrl + id;
-
-
-if(retrieve.publishedTimeText && retrieve.publishedTimeText.simpleText) var publishTime = retrieve.publishedTimeText.simpleText; else var publishTime = "";
-
-
-  
-  extractedData.push({
-    
-    
-    "type": "video",
-  
-  "title": title,
-  
-  "thumbnail": thumb,
-  
-  "liveStream" : liveStream,
-   
-  "description": descrip,
-  
-  "viewCount": views,
-  
-  "duration": duration, 
-  
-  "id": id ,
-  
-  "shortViewCount" : shortViews,
-  
-  "seconds" : seconds,
-  
-  "author" : author,
-  
-  "watchUrl" : watchUrl,
-  
-  "publishedAt" : publishTime
-  
-  
-   })
-    
-     
-    
-  }
-  
-return extractedData
-  
-}
-
-
-module.exports = extractData
-
-
-  
+module.exports = extractData;
